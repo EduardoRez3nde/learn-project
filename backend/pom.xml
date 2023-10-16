@@ -8,14 +8,14 @@
 		<version>2.4.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.devsuperior</groupId>
+	<groupId>com.rezende</groupId>
 	<artifactId>dslearn</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dslearn</name>
-	<description>DSLearn Bootcamp</description>
+	<description>DSLearn</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
