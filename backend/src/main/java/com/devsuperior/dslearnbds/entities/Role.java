@@ -16,9 +16,6 @@ public class Role implements Serializable {
 
     private String authority;
 
-    @ManyToMany(mappedBy = "roles")
-    private final Set<User> users = new HashSet<>();
-
     public Role() {}
 
     public Role(Long id, String authority) {
@@ -40,10 +37,6 @@ public class Role implements Serializable {
 
     public void setAuthority(String authority) {
         this.authority = authority;
-    }
-
-    public Set<User> getUsers() {
-        return users;
     }
 
     @Override
