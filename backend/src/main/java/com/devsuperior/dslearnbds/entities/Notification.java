@@ -2,6 +2,7 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_notifications")
@@ -27,11 +28,12 @@ public class Notification {
 
     public Notification() {}
 
-    public Notification(Long id, String text, Instant moment, String route) {
+    public Notification(Long id, String text, Instant moment, String route, User user) {
         this.id = id;
         this.text = text;
         this.moment = moment;
         this.route = route;
+        this.user = user;
     }
 
     public Long getId() {
@@ -68,5 +70,22 @@ public class Notification {
 
     public void setRoute(String route) {
         this.route = route;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Notification that = (Notification) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

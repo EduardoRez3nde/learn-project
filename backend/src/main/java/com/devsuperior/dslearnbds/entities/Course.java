@@ -2,11 +2,13 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_courses")
-public class Courses implements Serializable {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +20,12 @@ public class Courses implements Serializable {
 
     private String imgGrayUri;
 
-    public Courses() {}
+    @OneToMany(mappedBy = "course")
+    private final List<Offer> offers = new ArrayList<>();
 
-    public Courses(Long id, String name, String imgUri, String imgGrayUri) {
+    public Course() {}
+
+    public Course(Long id, String name, String imgUri, String imgGrayUri) {
         this.id = id;
         this.name = name;
         this.imgUri = imgUri;
@@ -59,11 +64,15 @@ public class Courses implements Serializable {
         this.imgGrayUri = imgGrayUri;
     }
 
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Courses courses = (Courses) o;
+        Course courses = (Course) o;
         return Objects.equals(id, courses.id);
     }
 

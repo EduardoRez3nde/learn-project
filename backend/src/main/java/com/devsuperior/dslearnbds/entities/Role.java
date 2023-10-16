@@ -42,6 +42,10 @@ public class Role implements Serializable {
         this.authority = authority;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
