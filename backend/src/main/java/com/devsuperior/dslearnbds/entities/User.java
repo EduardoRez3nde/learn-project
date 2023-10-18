@@ -19,14 +19,20 @@ public class User implements Serializable {
 
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private final List<Notification> notifications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "author")
+    private final List<Topic> topics = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "likes")
+    private final Set<Topic> topicsLikes = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "tb_users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private final Set<Role> roles =new HashSet<>();
-
-    @OneToMany(mappedBy = "user")
-    private final List<Notification> notifications = new ArrayList<>();
 
     public User() {}
 
@@ -71,6 +77,10 @@ public class User implements Serializable {
 
     public List<Notification> getNotifications() {
         return notifications;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
     }
 
     @Override
