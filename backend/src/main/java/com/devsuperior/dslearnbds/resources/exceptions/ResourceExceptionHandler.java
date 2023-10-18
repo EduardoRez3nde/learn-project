@@ -2,7 +2,9 @@ package com.devsuperior.dslearnbds.resources.exceptions;
 
 
 import com.devsuperior.dslearnbds.services.exceptions.DatabaseException;
+import com.devsuperior.dslearnbds.services.exceptions.ForbiddenException;
 import com.devsuperior.dslearnbds.services.exceptions.ResourceNotFoundException;
+import com.devsuperior.dslearnbds.services.exceptions.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -55,5 +57,19 @@ public class ResourceExceptionHandler {
 		}
 		
 		return ResponseEntity.status(status).body(err);
-	}	
+	}
+
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<OauthCustomError> forbiddenException(ForbiddenException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		OauthCustomError err = new OauthCustomError("Forbidden", e.getMessage());
+		return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<OauthCustomError> database(UnauthorizedException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		OauthCustomError err = new OauthCustomError("Unauthorized", e.getMessage());
+		return ResponseEntity.status(status).body(err);
+	}
 }
